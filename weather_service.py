@@ -14,7 +14,7 @@ SERVICE_KEY = os.getenv("WEATHER_API_KEY")
 # 기상청 API 정보
 BASE_URL = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst"
 
-# 안성 3동 격자 좌표
+# 안성 3동 격좌 좌표
 nx = 65     # x 좌표
 ny = 120    # y 좌표
 
@@ -22,7 +22,15 @@ def get_weather():
     # 현재 날짜와 시간 계산
     now = datetime.datetime.now()
     base_date = now.strftime("%Y%m%d")  # YYYYMMDD
-    base_time = "1500"                  # 기상청 단기예보 기준 시간
+    #base_time = now.strftime("%H")+"00"   # HH00
+
+    # 매시각 10분마다 날씨가 갱신되기 때문에 시간 맞추기
+    if now.minute < 10:
+        base_time = (now - datetime.timedelta(hours=1)).strftime("%H")+"00"
+    else:
+        base_time = now.strftime("%H")+"00"
+    print(base_time)
+
 
     # 요청 parameter setting
     params = {
@@ -40,11 +48,11 @@ def get_weather():
     response = requests.get(BASE_URL, params=params)
     if response.status_code == 200:     # 상태 (Error 200)
         data = response.json()  # JSON 데이터 파싱
-        print(data)
+        # print(data)
         items = data["response"]["body"]["items"]["item"]
 
         # 날씨 정보 출력
-        print("안성 3동의 날씨 정보:")
+        print(f"== {now.strftime("%H")}시 안성 3동 날씨 정보 ==")
         for item in items:
             category = item["category"]
             value = item["obsrValue"]

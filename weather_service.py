@@ -13,7 +13,7 @@ SERVICE_KEY = os.getenv("WEATHER_API_KEY")
 # 기상청 API 정보
 BASE_URL = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst"
 
-# 안성 3동 격좌 좌표
+# 지역 격좌 좌표
 NX = 65     # x 좌표
 NY = 120    # y 좌표
 

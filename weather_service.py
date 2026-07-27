@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 # .env 파일 로드
 load_dotenv()
 
-# 환경 변수에서 API 키 가져오기
+# 환경 변수에서 날씨 API 키 가져오기
 SERVICE_KEY = os.getenv("WEATHER_API_KEY")
 
 # 기상청 API 정보
@@ -87,6 +87,7 @@ def get_weather():
     payload = get_weather_payload()
     message = format_weather_message(payload)
     print(message)
+    return message
 
 if __name__ == "__main__":
     get_weather()

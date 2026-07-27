@@ -20,8 +20,8 @@
 언어: Python
 - 라이브러리:
   - requests (API 호출)
-  - schedule (작업 스케줄링)
   - json (데이터 처리)
+  - python-dotenv (환경 변수 불러오기)
 
 ## 외부 API:
   - 기상청 단기예보 조회서비스 API (날씨 정보)
